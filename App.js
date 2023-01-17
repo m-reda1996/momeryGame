@@ -10,7 +10,7 @@ import {
 import { useColorScheme } from "nativewind";
 import { Card } from "./Card";
 import { useEffect, useState } from "react";
-const cards = ["🧑🏻‍🎓", "🛀🏻", "👩🏻‍💼", "🧑🏻‍💻", "👷🏻", "👮🏻‍♂️"];
+const cards = ["🧑🏻‍🎓", "🛀🏻", "👩🏻‍💼", "🧑🏻‍💻", "👷🏻", "👮🏻‍♂️", "😅", "😜", "☠️", "🕵️‍♀️",'🧕','👳‍♂️','👩‍🏫','👶','👩‍🚀'];
 function shuffle(array) {
   let currentIndex = array.length,
     randomIndex;
@@ -32,7 +32,9 @@ function shuffle(array) {
 }
 export default function App() {
   const { colorScheme, toggleColorScheme } = useColorScheme();
-  const [board, setBoard] = useState(() => shuffle([...cards, ...cards]));
+  const [board, setBoard] = useState(() =>
+    shuffle([...cards, ...cards])
+  );
   const [selectedCards, setSelectedCards] = useState([]);
   const [matchedCards, SetMatchedCards] = useState([]);
   const [score, setScore] = useState(0);
@@ -68,7 +70,12 @@ export default function App() {
       className="flex-1 items-center justify-center bg-white  transition-all duration-1000 dark:bg-black h-full "
     >
       <View className=" flex-col items-center gap-5 w-full mb-5">
-        <Switch value={colorScheme === "dark"} onChange={toggleColorScheme} />
+        <View className ="flex flex-row gap-5 items-center">
+          <Text className="dark:text-white text-2xl font-bold ">
+            Dark / white mode
+          </Text>
+          <Switch value={colorScheme === "dark"} onChange={toggleColorScheme} />
+        </View>
 
         <Text className="dark:text-white text-2xl font-bold ">
           {didPlayerWin() ? "Congratulation👏" : "Memory"}
@@ -91,7 +98,9 @@ export default function App() {
           );
         })}
       </View>
-      <Button onPress={resetGame} title="reset" />
+      <View className="mt-4">
+        <Button onPress={resetGame} title="reset" />
+      </View>
       <StatusBar style={colorScheme === "dark" ? "light" : "dark"} />
     </SafeAreaView>
   );
